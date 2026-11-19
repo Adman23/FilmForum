@@ -2,6 +2,8 @@
 
 Aplicación PHP/Twig para gestionar películas, usuarios y comentarios.
 
+> Proyecto de práctica publicado con fines educativos. No está destinado a producción ni se ofrece con garantía de funcionamiento o seguridad.
+
 ## Documentación
 
 Consulta la [documentación del proyecto](docs/README.md).
