@@ -1,0 +1,127 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ css_path }}/pelicula.css" />
+  {% if css_print %}
+    <link rel="stylesheet" href="{{ css_path }}/pelicula_imprimir.css" />
+  {% endif %}
+  <script src="{{js_path}}/comments.js" defer></script>
+{% endblock %}
+
+{% block content %}
+  {{ parent() }}
+  <main>
+    <section class="flex-row">
+      <section class="main-content">
+        <!-- Este logo no se muestra, es especial para la versión de impresión -->
+        <div class="logo-imprimir">
+          <img class="logo"
+               src="data:image/*;base64,{{ shared_images['logo'] }}"
+               title="Logo"
+               alt="Logo de la página" />
+        </div>
+        <!-- Bloque para las imagenes -->
+        <ul class="film-image-blocks">
+          {% for image in images %}
+            <li class="image-block">
+              <img class="film-image"
+                   src="data:image/*;base64,{{ image.content }}"
+                   alt="foto película" />
+              <p class="image-footer">
+                {% if image.name is not null %}
+                  {{ image.name }}
+                {% else %}
+                  Portada
+                {% endif %}
+              </p>
+            </li>
+          {% endfor %}
+        </ul>
+        <div class="information-block">
+          <!-- Botón para mostrar el menú de comentarios -->
+          <button class="button" id="comment-button" onclick="showMenu()">
+            <img id="comment-img"
+                 src="data:image/*;base64,{{ shared_images['dialogue_box'] }}"
+                 title="menu"
+                 ,
+                 alt="comments menu" />
+          </button>
+          <div class="information">
+            <h2>{{ film.name }}</h2>
+            <!-- Título de la película -->
+            <h3>{{ film.year }}</h3>
+            <!--Año de salida de la película -->
+            <p>
+              -Género: {{ film.genre }}
+              <br />
+              <!--Atributos de la película-->
+              -Dirección: {{ film.directors }}
+              <br />
+              -Actores: {{ film.actors }}
+              <br />
+            </p>
+          </div>
+        </div>
+        <!-- Descripción de la pelicula -->
+        <h3 id="description-title">Descripción de la película:</h3>
+        <p class="sipnosis">{{ film.description }}</p>
+      </section>
+      <!-- Bloque para el menú de comentarios, se le pasa aqui como data-* el json de las palabras prohibidas con un filtro -->
+      <aside id="comment-menu"
+             class="unactive-menu"
+             data-user="{{ user_json|e("html_attr") }}"
+             data-csrf="{{ csrf_token|e("html_attr") }}"
+             data-prohibitedWords="{{ prohibited_words|e("html_attr") }}"
+             data-filmId="{{ film.id_json|e("html_attr") }}">
+        <h2 class="title" id="comments-title">Comentarios</h2>
+        <ul id="comment-list">
+        </ul>
+        <form id="comment-form"  method='post'>
+          <input type="hidden" name="_csrf" value="{{ csrf_token }}" />
+          {% if user %}
+            <label for="fcontent">Comentario:</label>
+            <textarea style="resize: none"
+                      id="fcontent"
+                      name="fcontent"
+                      rows="5"
+                      cols="40"
+                      required></textarea>
+            <p class="error-message"></p>
+            <input class="button comment-button" type="submit" value="Submit" />
+          {% else %}
+            <p><a class="log-link" href="/logIn">Inicia sesión</a> para comentar</p>
+          {% endif %}
+        </form>
+      </aside>
+    </section>
+    <!-- Termina sección con pelicula y comentarios -->
+    <!-- Bloque con botones e imagenes con link -->
+    <div class="film-footer">
+      <div>
+        <a href="https://www.instagram.com/">
+          <img class="logo-red-main"
+               src="data:image/*;base64,{{ shared_images['instagram'] }}"
+               alt="instagram" />
+        </a>
+      </div>
+      <div>
+        <a href="https://x.com/home">
+          <img class="logo-red-main"
+               src="data:image/*;base64,{{ shared_images['twitter'] }}"
+               alt="twitter" />
+        </a>
+      </div>
+      <a class="button" href="{{ film.id }}/print">Imprimir</a>
+      {% if user.role == "manager" or user.role == "superuser" %}
+        <a class="button" href="/pelicula/{{ film.id }}/edit">Editar</a>
+        <form action="/pelicula/{{ film.id }}/delete"
+              method="post"
+              style="display:inline">
+          <input type="hidden" name="_csrf" value="{{ csrf_token }}" />
+          <button class="button" type="submit">Borrar</button>
+        </form>
+      {% endif %}
+    </div>
+  </main>
+{% endblock %}

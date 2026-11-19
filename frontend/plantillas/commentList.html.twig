@@ -1,0 +1,38 @@
+{% extends "list.html.twig" %}
+
+{% block head %}
+  {{ parent() }}
+  <script src="{{js_path}}/comments.js" defer></script>
+{% endblock %}
+
+{% block before %}
+  <form method="post" class="search-form" autocomplete="off">
+    <input class="result"
+           type="text"
+           id="q"
+           name="q"
+           placeholder="Buscar comentario"
+           value="{{ app.request.get("q")|default('') }}" />
+  </form>
+{% endblock %}
+
+{% block list_section %}
+  <div class="list-row list-header">
+    <span class="list-cell">Id</span>
+    <span class="list-cell">Película</span>
+    <span class="list-cell">Id película</span>
+    <span class="list-cell">Usuario</span>
+    <span class="list-cell">Fecha</span>
+    <span class="list-cell">Editado</span>
+    <span class="list-cell">Contenido</span>
+    <span class="list-cell">Botones</span>
+  </div>
+  <section id="comment-menu"
+           data-csrf="{{ csrf_token|e("html_attr") }}"
+           data-user="{{ user_json|e("html_attr") }}"
+           data-prohibitedWords="{{ prohibited_words|e("html_attr") }}"
+           data-filmId="{{ film.id_json|e("html_attr") }}">
+    <ul id="comment-list" class="list">
+    </ul>
+  </section>
+{% endblock %}

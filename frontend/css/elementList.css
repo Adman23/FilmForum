@@ -1,0 +1,68 @@
+main {
+  overflow-y: scroll;
+}
+
+main::-webkit-scrollbar {
+  display: none;
+}
+
+/* Único de las cabeceras de la tabla*/
+.list-header {
+  font-weight: bold !important;
+  font-size: 1.3rem !important;
+}
+
+/* Para todo el listado, prefiero gestionar el padding y el margin con los
+elementos para que se aplique uniforme y se vea mejor */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* list row y comment es lo mismo, pero uso comment también porque para los comentarios
+que aparecen en dos partes estaba ya usando antes comment y es la clase que coloca el 
+js */
+.list-row,
+.comment {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 0 20px;
+  border-bottom: 1px solid #ccc;
+  font-size: 1.1rem;
+  flex-wrap: nowrap;
+}
+
+.list-cell {
+  flex: 1 1 0; /*flex growm shrink y basis -> No tienen tamaños fijos, crecen en función
+                    del espacio disponible*/
+  padding: 8px; /* Sobre todo es separación superior e inferior*/
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.button-container {
+  white-space: wrap;
+}
+
+/* Esto es para hacerlo responsive, en el momento que pase de 
+600px se muestran solo los dos primeros list cell, por eso a 
+partir del tercer list-cell se ponen el display a none*/
+@media (max-width: 600px) {
+  .list-row {
+    flex-wrap: wrap;
+  }
+  .list-cell {
+    flex: 1 1 50%;
+    max-width: 50%;
+    box-sizing: border-box;
+  }
+  .list-cell:nth-child(n + 3) {
+    display: none;
+  }
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% block head %}
+      <title>Pirated films</title>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="{{ css_path }}/general.css" />
+      {% if shared_images["logo"] is not null %}
+        <link rel="icon"
+              type="image/png"
+              href="data:image/png;base64,{{ shared_images['logo'] }}"
+              title="favicon" />
+      {% endif %}
+    {% endblock %}
+  </head>
+  <body>
+    <header>
+      <!-- Logo que mostraremos con enlace al index o portada-->
+      <div class="logo-box">
+        <a href="/portada">
+          {% if shared_images["logo"] is not null %}
+            <img class="logo"
+                 src="data:image/*;base64,{{ shared_images['logo'] }}"
+                 title="Logo"
+                 alt="Logo de la página" />
+          {% endif %}
+        </a>
+      </div>
+      <div id="title-menu">
+        <h1 class="main-title">PIRATED FILMS</h1>
+        <nav class="header-menu">
+          <ul class="horizontal-menu">
+            <li class="horizontal-menu-item">
+              <a class="menu-link" href="/logIn">
+                {% if user %}
+                  Your account ({{ user.role }})
+                {% else %}
+                  Log In
+                {% endif %}
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <aside class="sidebar">
+      <h2 class="title">Enlaces</h2>
+      <nav>
+        <ul class="side-menu">
+          {% if user and user.role == "superuser" %}
+            <li class="vertical-menu-item"> <a class="menu-link" href="/usuarios">Lista de usuarios</a> </li>
+          {% endif %}
+          {% if user and user.role != "registered" and user.role != "moderator" %}
+            <li class="vertical-menu-item"> <a class="menu-link" href="/peliculas">Lista de películas</a> </li>
+          {% endif %}
+          {% if user and user.role != "registered" %}
+            <li class="vertical-menu-item"> <a class="menu-link" href="/commentList">Lista de comentarios</a> </li>
+          {% endif %}
+          <li class="vertical-menu-item"> <a class="menu-link" href="/portada">Enlace1</a> </li>
+          <li class="vertical-menu-item"> <a class="menu-link" href="/portada">Enlace2</a> </li>
+        </ul>
+      </nav>
+      <div class="logos-redes">
+        <h2 class="title">Redes sociales</h2>
+        <div>
+          <a href="/portada">
+            <img class="logo-red"
+                 src="data:image/*;base64,{{ shared_images['instagram'] }}"
+                 alt="instagram" />
+          </a>
+        </div>
+        <div>
+          <a href="/portada">
+            <img class="logo-red"
+                 src="data:image/*;base64,{{ shared_images['twitter'] }}"
+                 alt="twitter" />
+          </a>
+        </div>
+        <div>
+          <a href="/portada">
+            <img class="logo-red"
+                 src="data:image/*;base64,{{ shared_images['facebook'] }}" />
+          </a>
+        </div>
+      </div>
+    </aside>
+    {% block content %}{% endblock %}
+
+    <footer>
+      <h2>Proyecto de ejemplo</h2>
+      <p>© 2025 FilmForum. Proyecto de demostración.</p>
+    </footer>
+  </body>
+</html>

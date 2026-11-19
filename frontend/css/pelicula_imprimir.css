@@ -1,0 +1,72 @@
+/* 
+    Created on : 7 mar 2025, 16:12:22
+    Author     : adam
+*/
+
+header,
+aside.sidebar {
+  display: none;
+}
+
+main .film-footer {
+  display: none;
+}
+
+.film-image {
+  filter: grayscale(100%);
+}
+
+@media screen and (max-width: 900px) {
+}
+@media screen and (min-width: 900px) {
+}
+
+main .film-image-blocks {
+  mask-image: none;
+  overflow-y: hidden;
+}
+
+.logo:hover {
+  opacity: 1;
+  cursor: default;
+}
+.logo-imprimir {
+  display: block;
+  padding: 20px;
+  padding-bottom: 0;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+}
+
+body {
+  display: block;
+  background-color: white;
+  color: black;
+  margin: 60px;
+  height: 100%;
+
+  overflow: visible;
+
+  font-size: 1.25rem;
+  font-family: serif;
+}
+
+main {
+  margin: 20px;
+  display: block;
+  background-color: white;
+  background-image: none;
+}
+footer {
+  margin: 20px;
+  margin-bottom: 30px;
+  background-color: white;
+  background-image: none;
+}
+
+#comment-button {
+  display: none;
+}

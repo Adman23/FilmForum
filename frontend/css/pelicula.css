@@ -1,0 +1,230 @@
+/*----------------------------------------------------------------------------*/
+/* Contenido de la página en el main */
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+main .main-content {
+  width: -webkit-fill-available;
+}
+
+/* Bloque inicial */
+main .information-block {
+  padding: 25px;
+  display: grid;
+  grid-template-areas: "information image";
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto;
+}
+
+main .information {
+  grid-area: information;
+}
+
+.information p {
+  line-height: 1.6;
+  text-wrap: wrap;
+}
+
+#description-title {
+  padding: 25px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+main .sipnosis {
+  text-align: justify;
+  padding: 25px;
+  padding-top: 0;
+}
+
+main .flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Bloque para las imagenes del main al lado del texto */
+main .film-image-blocks {
+  display: flex;
+  flex-direction: column;
+  float: right;
+  gap: 20px;
+  padding: 25px;
+  max-height: 610px;
+  overflow-y: scroll;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 15%,
+      black 85%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to top,
+      transparent 0%,
+      black 15%,
+      black 85%,
+      transparent 100%
+    );
+}
+
+main .film-image-blocks::-webkit-scrollbar {
+  display: none;
+}
+
+.image-block {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+}
+
+.film-image {
+  width: 220px;
+  height: 240px;
+  flex-shrink: 0;
+  border-radius: 20px;
+}
+
+.image-footer {
+  width: 220px;
+  height: 25px;
+  margin: 0;
+  padding-top: 10px;
+}
+
+/* Bloque final */
+main .film-footer {
+  display: flex;
+  flex-direction: row;
+  gap: 5vw;
+
+  margin-top: auto;
+
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 50px;
+}
+
+.logo-red-main {
+  display: block;
+  width: 5vh;
+  height: auto;
+  border-radius: 10px;
+}
+
+#comment-menu {
+  /* De esta forma se carga la imagen de fondo desde el principio*/
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../images/fondo4.avif");
+  background-size: cover;
+  background-position: center;
+}
+
+#comment-button {
+  margin-left: auto;
+  margin-bottom: auto;
+  height: 50px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#comment-img {
+  height: 40px;
+  width: 50px;
+}
+
+.unactive-menu {
+  /* Escondemos el menú */
+  height: 0;
+  width: 0;
+  overflow: hidden;
+}
+.active-comments-menu {
+  padding: 10px;
+  margin: 20px;
+  border: 2px solid rgb(84, 89, 99);
+  border-radius: 10px;
+
+  min-height: 200px;
+  max-height: 900px;
+  width: 400px;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: auto;
+}
+
+#comment-list {
+  list-style-type: none;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+
+  padding: 10px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+  background-size: cover;
+  background-position: center;
+  border: 2px solid rgb(84, 89, 99);
+  border-radius: 10px;
+
+  width: 350px;
+  overflow-y: scroll;
+  flex-direction: column;
+}
+
+#comment-list::-webkit-scrollbar {
+  display: none;
+}
+
+#comments-title {
+  margin-bottom: 5px;
+}
+
+/*Para cada comentario, tener en cuenta que tiene tanto autor, fecha y hora y texto*/
+.comment {
+  margin: 5px;
+  border: 1px solid rgb(84, 89, 99);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+}
+
+#comment-form {
+  padding: 10px;
+  border: 2px solid rgb(84, 89, 99);
+  border-radius: 10px;
+  width: 350px;
+
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+  background-size: cover;
+  background-position: center;
+}
+
+.error-message {
+  font-size: 0.9rem;
+  color: red;
+  padding: 0;
+  margin: 0;
+}
+
+.comment-text {
+  text-wrap: wrap;
+  word-wrap: break-word;
+  font-size: 0.9rem;
+}
+
+.comment-label {
+  padding: 5px;
+  padding-left: 0px;
+  margin: 0px;
+  font-size: 1rem;
+  font-weight: 600;
+}

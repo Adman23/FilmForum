@@ -1,0 +1,66 @@
+/*----------------------------------------------------------------------------*/
+/* Contenido de la página en el main */
+
+ul.film-list {
+  list-style-type: none;
+  padding: 20px;
+  margin: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 150px);
+  justify-content: center;
+  gap: 40px;
+}
+
+li.film {
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+.film a {
+  text-decoration: none;
+  color: white;
+  height: 250px;
+
+  /*Corregir 5px extraños que aparecian como espacio*/
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+img.cover {
+  min-width: 75px;
+  max-width: 150px;
+  height: 225px;
+  padding: 0;
+  margin: 0;
+}
+
+p.film-name {
+  min-width: 75px;
+  max-width: 150px;
+  height: 25px;
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#add-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#add-button {
+  width: fit-content;
+  height: fit-content;
+
+  text-align: center;
+
+  border-radius: 50px;
+
+  padding: 0.5rem 1.25rem;
+  font-size: 2.5rem;
+}
